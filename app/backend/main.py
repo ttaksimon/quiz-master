@@ -34,6 +34,9 @@ if os.getenv("ENVIRONMENT") == "production":
     allowed_origins.extend([
         "https://quizmaster.taksimon.hu",
         "https://www.quizmaster.taksimon.hu",
+
+        "https://quizmaster323.netlify.app",
+        "https://www.quizmaster323.netlify.app"
     ])
 else:
     # Development origins
