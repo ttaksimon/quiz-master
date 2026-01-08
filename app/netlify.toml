@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  base = "app/frontend"
+  command = "npm ci && npm run build"
   functions = "netlify/functions"
   publish = "dist"
 
@@ -14,7 +15,7 @@
 
 [context.production]
   environment = { NODE_ENV = "production" }
-  command = "npm run build"
+  command = "npm ci && npm run build"
 
 [context.deploy-preview]
   environment = { NODE_ENV = "development" }
