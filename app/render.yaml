@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: quizmaster-api
+    runtime: python
+    runtimeVersion: 3.11
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port 8000
+    envVars:
+      - key: DATABASE_URL
+        scope: run
+        value: ${DATABASE_URL}
+      - key: SECRET_KEY
+        scope: run
+        value: ${SECRET_KEY}
+      - key: ALGORITHM
+        scope: run
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        scope: run
+        value: "30"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        scope: run
+        value: "7"
+      - key: GOOGLE_API_KEY
+        scope: run
+        value: ${GOOGLE_API_KEY}
+      - key: FRONTEND_URL
+        scope: run
+        value: https://quizmaster.taksimon.hu
+      - key: ENVIRONMENT
+        scope: run
+        value: production
+    memoryLimit: 512 MB
+    cpuCount: 0.5
+
+  - type: pserv
+    name: quizmaster-db
+    runtime: postgres
+    runtimeVersion: 15
+    plan: starter
+    databaseName: quizmaster
+    envVars:
+      - key: POSTGRES_PASSWORD
+        scope: run
+        value: ${POSTGRES_PASSWORD}
