@@ -25,22 +25,22 @@ app = FastAPI(
 app.add_middleware(TokenRefreshMiddleware)
 
 # CORS middleware configuration
-allowed_origins = os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")
-allowed_origins = [origin.strip() for origin in allowed_origins]
+env_origins = os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")
 
-# Add environment-specific origins
+# Use a set to avoid duplicates and allow multiple env values
+allowed_origins = set(origin.strip() for origin in env_origins if origin.strip())
+
 if os.getenv("ENVIRONMENT") == "production":
-    # Production origins
-    allowed_origins.extend([
+    # Production defaults (Netlify + future custom domain)
+    allowed_origins.update([
+        "https://quizmaster323.netlify.app",
+        "https://www.quizmaster323.netlify.app",
         "https://quizmaster.taksimon.hu",
         "https://www.quizmaster.taksimon.hu",
-
-        "https://quizmaster323.netlify.app",
-        "https://www.quizmaster323.netlify.app"
     ])
 else:
-    # Development origins
-    allowed_origins.extend([
+    # Development defaults
+    allowed_origins.update([
         "http://localhost:5173",
         "http://localhost:3000",
         "http://localhost:5000",
@@ -48,7 +48,7 @@ else:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=list(allowed_origins),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
