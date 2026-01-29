@@ -425,19 +425,6 @@ Típusok: feat, fix, docs, style, refactor, test, chore
 
 ---
 
-## 📞 Support
-
-- 📧 Email: your.email@example.com
-- 💬 Discussions: [GitHub Discussions](https://github.com/YOUR_USERNAME/quizmaster/discussions)
-
----
-
-## 📄 License
-
-MIT License - See [LICENSE](./LICENSE) for details
-
----
-
 ## 👨‍💻 Szerző
 
 **TAKÁCS-SIMON F8BTO8**
@@ -451,8 +438,3 @@ MIT License - See [LICENSE](./LICENSE) for details
 - Render.com & Netlify
 - Google Generative AI
 
----
-
-**Köszönöm, hogy használod a QuizMaster-t!** ⭐
-
-Csillag a GitHub repo-n nagyra értékeltetne! 🌟
